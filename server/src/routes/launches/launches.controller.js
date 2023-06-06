@@ -32,16 +32,13 @@ function httpAddNewLaunch(request, response) {
 }
 
 function httpAbortLaunch(request, response) {
-  console.log("aqui");
   const launchId = Number(request.params.id);
 
   if (!existsLaunchId(launchId)) {
-    console.log("error");
     return response.status(404).json({
       error: "Launch not found",
     });
   }
-  console.log("abort");
   const aborted = abortLaunchById(launchId);
   return response.status(200).json(aborted);
 }

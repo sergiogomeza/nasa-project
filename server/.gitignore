@@ -3,3 +3,6 @@
 
 # production builds
 /public
+
+# local environment variables
+.env

@@ -14,7 +14,7 @@ describe("Test Launches API", () => {
   describe("Test GET /launches", () => {
     test("It should respond with 200 success", async () => {
       await request(app)
-        .get("/launches")
+        .get("/v1/launches")
         .expect("Content-Type", /json/)
         .expect(200);
     });
@@ -23,7 +23,7 @@ describe("Test Launches API", () => {
   describe("Test POST /launches", () => {
     test("It should respond with 201 created", async () => {
       const response = await request(app)
-        .post("/launches")
+        .post("/v1/launches")
         .send({
           mission: "mockedMission",
           rocket: "mockedRocket",
@@ -47,7 +47,7 @@ describe("Test Launches API", () => {
 
     test("It should catch invalid dates", async () => {
       const response = await request(app)
-        .post("/launches")
+        .post("/v1/launches")
         .send({
           mission: "mockedMission",
           rocket: "mockedRocket",
@@ -63,7 +63,7 @@ describe("Test Launches API", () => {
 
     test("It should catch missing required properties", async () => {
       const response = await request(app)
-        .post("/launches")
+        .post("/v1/launches")
         .send({})
         .expect(400);
 
@@ -75,10 +75,10 @@ describe("Test Launches API", () => {
 
   describe("Test DELETE /launches", () => {
     test("It should abort launch", async () => {
-      await request(app).delete("/launches/100").expect(200);
+      await request(app).delete("/v1/launches/100").expect(200);
     });
     test("It should catch launch not found", async () => {
-      await request(app).delete("/launches/11").expect(404);
+      await request(app).delete("/v1/launches/11").expect(404);
     });
   });
 });
